@@ -8,6 +8,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - run: chmod +x gradlew
     - name: Set up PATH
       run: |
         echo "${ANDROID_HOME}/build-tools/30.0.1" >> $GITHUB_PATH
@@ -15,6 +16,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 17
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
     - name: Build mod jar
       run: ./gradlew deploy
     - name: Upload built jar file
